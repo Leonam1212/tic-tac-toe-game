@@ -84,7 +84,7 @@ export const Button = styled.button`
   text-transform: uppercase;
 
   min-width: 250px;
-  width: 32.5%;
+  width: 26.5%;
   height: 50px;
 
   :hover {
@@ -102,6 +102,33 @@ export const TurnMessage = styled.p`
 
 export const ResultMessage = styled.strong`
   font-size: 2rem;
-  color: var(--main-green);
+  color: var(--main-red);
   text-transform: uppercase;
+`;
+
+export const TurnAndResults = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  background: var(--main-white);
+  width: 26.5%;
+  min-width: 300px;
+  border-radius: 8px;
+
+  div {
+    background: var(--main-green);
+    width: 30%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 8px;
+    color: var(--main-white);
+  }
+
+  span {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
 `;

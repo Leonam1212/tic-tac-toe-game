@@ -16,8 +16,11 @@ export default createGlobalStyle`
   }
     
   body {
-    background-color: #1e272e;
-    font-family: sans-serif;
+    background: rgba(0,0,0,0.7) url('https://wallpaperaccess.com/full/1846830.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: hard-light;
+    font-family: "Nunito", sans-serif;
     letter-spacing: 0.3px;
   }
 

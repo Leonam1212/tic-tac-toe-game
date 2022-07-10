@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
-import { Cell, Board, Button, TurnMessage, ResultMessage } from "./style";
+import { Cell, Board, Button, ResultMessage, TurnAndResults } from "./style";
 
 type Players = "O" | "X";
 
 export const BoardComponent = () => {
-  const [playerXSelections, setPlayerXSelections] = useState<Number[]>([]);
-  const [playerOSelections, setPlayerOSelections] = useState<Number[]>([]);
-  let playerSelections: Number[] = [];
-  const [matches, setMatches] = useState(0);
-  console.log("matchees", matches);
-  // Turnos
   const [turn, setTurn] = useState<Players>("X");
 
-  // Vencedor
   const [winner, setWinner] = useState<Players | undefined>(undefined);
 
-  // Empate
   const [draw, setDraw] = useState<boolean | undefined>(undefined);
 
   const squares = new Array(9).fill(undefined);
 
   const [boardSquares, setBoardSquares] = useState(squares);
 
-  console.log(boardSquares);
+  const gameOver = !!winner || !!draw;
 
   const handleClick = (index: number) => {
     if (winner) return undefined;
@@ -49,7 +41,7 @@ export const BoardComponent = () => {
       [boardSquares[2], boardSquares[5], boardSquares[8]],
     ];
 
-    victoryLines.forEach((line) => {
+    const vict = victoryLines.forEach((line) => {
       if (line.every((line) => line === "X")) {
         setWinner("X");
       }
@@ -57,14 +49,14 @@ export const BoardComponent = () => {
         setWinner("O");
       }
     });
+
+    checkDraw();
   };
 
   const checkDraw = () => {
-    boardSquares.forEach((cell) => {
-      if (cell !== undefined) {
-        console.log("draw");
-      }
-    });
+    if (boardSquares.every((item) => item !== undefined)) {
+      setDraw(true);
+    }
   };
 
   const reset = () => {
@@ -78,9 +70,14 @@ export const BoardComponent = () => {
 
   return (
     <>
-      {winner && <ResultMessage>{winner} venceu</ResultMessage>}
-      {draw && <ResultMessage>Empate</ResultMessage>}
-      {!winner && <TurnMessage>{turn}, ataque agora!</TurnMessage>}
+      <TurnAndResults>
+        <div>{turn}</div>
+
+        <span>
+          {winner && <ResultMessage>{winner} venceu</ResultMessage>}
+          {draw && <ResultMessage>Empate</ResultMessage>}
+        </span>
+      </TurnAndResults>
 
       <Board>
         {boardSquares.map((item, i) => (
@@ -90,15 +87,7 @@ export const BoardComponent = () => {
         ))}
       </Board>
 
-      {<Button onClick={reset}>Reiniciar</Button>}
+      {gameOver && <Button onClick={reset}>Reiniciar</Button>}
     </>
   );
 };
-
-{
-  /* <ResultMessage>X é o vitorioso</ResultMessage>
-      <TurnMessage>X, ataque agora!</TurnMessage> */
-}
-{
-  /* <ResultMessage>Empate</ResultMessage> */
-}
