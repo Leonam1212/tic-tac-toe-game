@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
+import { addWinnerO, addWinnerX, resetWinner } from "../../redux/board/action";
+import { Winner } from "../../redux/board/types";
+import { useAppDispatch, useAppSelector } from "../../Router";
 import { Cell, Board, Button, ResultMessage, TurnAndResults } from "./style";
 
 type Players = "O" | "X";
 
 export const BoardComponent = () => {
+  const dispatch = useAppDispatch();
+
+  const winnerState: Winner = useAppSelector((state) => state.boardReducer);
+
+  console.log("AQUI", winnerState);
   const [turn, setTurn] = useState<Players>("X");
 
-  const [winner, setWinner] = useState<Players | undefined>(undefined);
+  // const [winner, setWinner] = useState<Players | undefined>(undefined);
 
   const [draw, setDraw] = useState<boolean | undefined>(undefined);
 
@@ -14,10 +22,10 @@ export const BoardComponent = () => {
 
   const [boardSquares, setBoardSquares] = useState(squares);
 
-  const gameOver = !!winner || !!draw;
+  const gameOver = !!winnerState.winner || !!draw;
 
   const handleClick = (index: number) => {
-    if (winner) return undefined;
+    if (winnerState.winner) return undefined;
     if (boardSquares[index] !== undefined) return null;
 
     setBoardSquares(
@@ -41,12 +49,12 @@ export const BoardComponent = () => {
       [boardSquares[2], boardSquares[5], boardSquares[8]],
     ];
 
-    const vict = victoryLines.forEach((line) => {
+    victoryLines.forEach((line) => {
       if (line.every((line) => line === "X")) {
-        setWinner("X");
+        dispatch(addWinnerX());
       }
       if (line.every((line) => line === "O")) {
-        setWinner("O");
+        dispatch(addWinnerO());
       }
     });
 
@@ -60,7 +68,7 @@ export const BoardComponent = () => {
   };
 
   const reset = () => {
-    setWinner(undefined);
+    dispatch(resetWinner());
     setDraw(undefined);
     setTurn("X");
     setBoardSquares(squares);
@@ -74,7 +82,9 @@ export const BoardComponent = () => {
         <div>{turn}</div>
 
         <span>
-          {winner && <ResultMessage>{winner} venceu</ResultMessage>}
+          {winnerState.winner !== undefined && (
+            <ResultMessage> {winnerState.winner} venceu</ResultMessage>
+          )}
           {draw && <ResultMessage>Empate</ResultMessage>}
         </span>
       </TurnAndResults>

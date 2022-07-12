@@ -22,6 +22,8 @@ export default createGlobalStyle`
     background-blend-mode: hard-light;
     font-family: "Nunito", sans-serif;
     letter-spacing: 0.3px;
+
+    height: 100vh;
   }
 
   h1,h2,h3,h4,h5,h6 {

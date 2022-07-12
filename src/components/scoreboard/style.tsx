@@ -8,7 +8,7 @@ export const ContainerScore = styled.div`
   margin-bottom: -100px;
 
   border-radius: 8px;
-  background: #1c1b29;
+  background: rgba(0, 0, 0, 0.9);
 
   display: flex;
 

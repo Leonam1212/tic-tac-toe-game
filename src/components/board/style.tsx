@@ -102,7 +102,7 @@ export const TurnMessage = styled.p`
 
 export const ResultMessage = styled.strong`
   font-size: 2rem;
-  color: var(--main-red);
+  color: var(--main-green);
   text-transform: uppercase;
 `;
 
