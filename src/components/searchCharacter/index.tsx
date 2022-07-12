@@ -1,6 +1,7 @@
 import {
   loadFailureO,
   loadFailureX,
+  loadRequest,
   playGame,
   setThumbO,
   setThumbX,
@@ -21,9 +22,9 @@ export const SearchCharacter = () => {
         char.name.includes(name)
       );
       const thumb = `${char[0].thumbnail.path}.${char[0].thumbnail.extension}`;
-      if (char.length !== 0) {
-        dispatch(setThumbX(thumb));
-      }
+
+      dispatch(loadRequest());
+      dispatch(setThumbX(thumb));
     } catch (error) {
       dispatch(loadFailureX());
     }
@@ -36,6 +37,7 @@ export const SearchCharacter = () => {
       );
       const thumb = `${char[0].thumbnail.path}.${char[0].thumbnail.extension}`;
 
+      dispatch(loadRequest());
       dispatch(setThumbO(thumb));
     } catch (error) {
       dispatch(loadFailureO());

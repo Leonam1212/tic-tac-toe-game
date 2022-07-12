@@ -16,7 +16,7 @@ const INITIAL_STATE: CharacterState = {
 const reducer: Reducer<CharacterState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CharactersTypes.LOAD_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, errorX: false, errorO: false };
 
     case CharactersTypes.LOAD_SUCCESS:
       return {

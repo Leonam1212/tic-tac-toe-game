@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { call, put, all, takeLatest } from "redux-saga/effects";
 import { api } from "../../services/api";
 
@@ -6,7 +7,7 @@ import { CharactersTypes } from "./types";
 
 export function* load() {
   try {
-    const response = yield call(api.get);
+    const response: AxiosResponse = yield call(api.get, "");
     yield put(loadSuccess(response.data.data.results));
   } catch (err) {
     yield put(loadFailure());
