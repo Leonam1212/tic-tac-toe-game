@@ -11,7 +11,6 @@ export const BoardComponent = () => {
 
   const winnerState: Winner = useAppSelector((state) => state.boardReducer);
 
-  console.log("AQUI", winnerState);
   const [turn, setTurn] = useState<Players>("X");
 
   // const [winner, setWinner] = useState<Players | undefined>(undefined);
