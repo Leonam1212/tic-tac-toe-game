@@ -17,5 +17,3 @@ export const Container = styled.main`
   width: 100%;
   height: 100vh;
 `;
-
-export const Footer = styled.footer``;

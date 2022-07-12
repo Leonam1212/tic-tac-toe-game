@@ -21,7 +21,6 @@ export const SearchCharacter = () => {
         char.name.includes(name)
       );
       const thumb = `${char[0].thumbnail.path}.${char[0].thumbnail.extension}`;
-      console.log(thumb);
       if (char.length !== 0) {
         dispatch(setThumbX(thumb));
       }
